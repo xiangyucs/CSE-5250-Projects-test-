@@ -1,6 +1,6 @@
 /*
 
-  15418 Spring 2012 note: This code was modified from example code
+  Note: This code was modified from example code
   originally provided by Intel.  To comply with Intel's open source
   licensing agreement, their copyright is retained below.
 
