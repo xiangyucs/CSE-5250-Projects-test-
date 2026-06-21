@@ -1,0 +1,30 @@
+# ---- Build artifacts ----
+objs/
+*.o
+*.log
+*.ppm
+*.png.tmp
+__pycache__/
+*.pyc
+
+# ---- Generated datasets (prog6 auto-generates data.dat locally; too big for git) ----
+data.dat
+data_auto.dat
+
+# ---- prog6 plot.py outputs (each student regenerates these locally) ----
+Project1_SIMD_and_Multicore/prog6_kmeans/start.png
+Project1_SIMD_and_Multicore/prog6_kmeans/end.png
+
+# ---- Compiled student executables (rebuilt by `make`) ----
+Project1_SIMD_and_Multicore/prog1_mandelbrot_threads/mandelbrot
+Project1_SIMD_and_Multicore/prog2_vecintrin/myexp
+Project1_SIMD_and_Multicore/prog3_mandelbrot_ispc/mandelbrot_ispc
+Project1_SIMD_and_Multicore/prog4_sqrt/sqrt
+Project1_SIMD_and_Multicore/prog5_saxpy/saxpy
+Project1_SIMD_and_Multicore/prog6_kmeans/kmeans
+Project1_SIMD_and_Multicore/prog6_kmeans/gen_data
+Project2_Task_Scheduling/part_a/runtasks
+Project2_Task_Scheduling/part_b/runtasks
+
+# Note: the staff reference binaries (runtasks_ref_*) and module_ref.so are
+# intentionally NOT ignored — they are needed for grading/testing.
