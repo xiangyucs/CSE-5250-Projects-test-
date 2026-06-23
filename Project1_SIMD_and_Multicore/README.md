@@ -2,6 +2,14 @@
 
 **100 points total + 6 points extra credit**
 
+> **CSE5250 required vs. optional work.** To keep the workload manageable, the
+> required core for this course is **Program 1 (threads), Program 2 (SIMD
+> intrinsics), Program 3 (ISPC), and Program 6 (k-means)** — these cover both
+> forms of parallelism (SIMD + multicore) and the main analysis skills.
+> **Program 4 (sqrt) and Program 5 (saxpy) are optional / extra credit**, as are
+> all parts labeled "Extra Credit" throughout. Point weights are set in Canvas;
+> grade against your own machine's serial baseline and report your core count.
+
 ## Overview ##
 
 This assignment is intended to help you develop an understanding of the two primary forms of parallel execution present in a modern multi-core CPU:

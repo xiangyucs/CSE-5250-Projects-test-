@@ -250,7 +250,21 @@ void clampedExpVector(float* values, int* exponents, float* output, int N) {
   // Your solution should work for any value of
   // N and VECTOR_WIDTH, not just when VECTOR_WIDTH divides N
   //
-  
+  // CSUSB HINT (model it on absVector() above; full API is in CSE5250intrin.h):
+  //  1. Loop i = 0, VECTOR_WIDTH, 2*VECTOR_WIDTH, ...  On the LAST chunk
+  //     fewer than VECTOR_WIDTH elements remain: build a mask of the active
+  //     lanes with _cse5250_init_ones(N - i) instead of all-ones.
+  //  2. Load this chunk's values and exponents (_cse5250_vload_float /
+  //     _cse5250_vload_int) under that mask.
+  //  3. The exponent is per-lane, so you cannot write a fixed-count loop.
+  //     Start result = 1.0, then repeat (multiply result by value) while any
+  //     lane still has exponent > 0: use a count/compare mask so finished
+  //     lanes stop multiplying. Decrement the per-lane exponent each round.
+  //  4. Clamp: where result > 9.999999f, set it to 9.999999f
+  //     (_cse5250_vgt_float gives the mask; _cse5250_vset_float the constant).
+  //  5. Store under the active-lane mask (_cse5250_vstore_float).
+  //
+
 }
 
 // returns the sum of all elements in values
@@ -271,7 +285,14 @@ float arraySumVector(float* values, int N) {
   //
   // CSE5250 STUDENTS TODO: Implement your vectorized version of arraySumSerial here
   //
-  
+  // CSUSB HINT (this is the "bonus" part; N is a multiple of VECTOR_WIDTH here):
+  //  1. Keep a running accumulator vector; in each chunk load VECTOR_WIDTH
+  //     values and add them lane-wise (_cse5250_vadd_float) into it.
+  //  2. After the loop you must reduce the accumulator's VECTOR_WIDTH lanes
+  //     down to ONE number. The intrinsics include a tree-style hadd/
+  //     interleave pair (see CSE5250intrin.h) that sums lanes in log2(WIDTH)
+  //     steps — apply it, then read lane 0.
+  //
   for (int i=0; i<N; i+=VECTOR_WIDTH) {
 
   }

@@ -35,7 +35,21 @@ void workerThreadStart(WorkerArgs * const args) {
     // to compute a part of the output image.  For example, in a
     // program that uses two threads, thread 0 could compute the top
     // half of the image and thread 1 could compute the bottom half.
-
+    //
+    // CSUSB HINT (getting started — no locks needed):
+    //  1. Work out which rows THIS thread owns from args->threadId and
+    //     args->numThreads. A simple first version gives each thread a
+    //     contiguous block of about (height / numThreads) rows.
+    //  2. Call mandelbrotSerial(x0, y0, x1, y1, width, height,
+    //     startRow, numRows, maxIterations, output) for the rows you own.
+    //  3. Mind the last thread: height may not divide evenly by numThreads,
+    //     so make sure every row 0..height-1 is computed exactly once.
+    //
+    //  For Part 4 you will change ONLY this row->thread mapping (e.g. an
+    //  interleaved / round-robin assignment) to balance load — no other
+    //  code or synchronization is required.
+    //
+    // Remove the printf below once you start computing real output.
     printf("Hello world from thread %d\n", args->threadId);
 }
 

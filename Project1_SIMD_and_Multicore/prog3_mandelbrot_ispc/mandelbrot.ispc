@@ -68,12 +68,18 @@ export void mandelbrot_ispc_withtasks(uniform float x0, uniform float y0,
                                       uniform int output[])
 {
 
-    uniform int rowsPerTask = height / 2;
+    // CSUSB HINT (Part 2): the starter launches only 2 tasks, so it uses at
+    // most 2 cores. To improve speedup, raise the NUMBER of tasks and shrink
+    // rowsPerTask to match — keep the invariant rowsPerTask * numTasks == height
+    // (so every row is computed once). Try a count tied to the image height,
+    // e.g. one task per row or a few rows per task, and measure which gives the
+    // best speedup on your machine. Do NOT hard-code a value tuned to one CPU.
+    uniform int numTasks = 2;                 // TODO: increase me
+    uniform int rowsPerTask = height / numTasks;
 
-    // create 2 tasks
-    launch[2] mandelbrot_ispc_task(x0, y0, x1, y1,
+    launch[numTasks] mandelbrot_ispc_task(x0, y0, x1, y1,
                                      width, height,
                                      rowsPerTask,
                                      maxIterations,
-                                     output); 
+                                     output);
 }

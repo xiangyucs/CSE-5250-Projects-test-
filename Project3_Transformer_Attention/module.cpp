@@ -126,7 +126,19 @@ torch::Tensor myNaiveAttention(torch::Tensor QTensor, torch::Tensor KTensor, tor
     */
     
     // -------- YOUR CODE HERE  -------- //
-    
+    // CSUSB HINT (naive attention). For each batch b and head h:
+    //   1. S = Q * K^T  -> store in QK_t (shape N x N):
+    //        for i in 0..N, j in 0..N:
+    //          S[i][j] = sum over t in 0..d of
+    //                    fourDimRead(Q,b,h,i,t,...) * fourDimRead(K,b,h,j,t,...)
+    //        write with twoDimWrite(QK_t, i, j, N, S[i][j]).
+    //   2. Softmax each ROW i of QK_t: exp every entry, then divide the row by
+    //      its sum (the grading inputs are small, so plain exp is fine).
+    //   3. O = S * V  -> for i in 0..N, t in 0..d:
+    //        O[i][t] = sum over j in 0..N of S[i][j]*fourDimRead(V,b,h,j,t,...)
+    //      write with fourDimWrite(O,b,h,i,t,...).
+    // Use the 4D/2D accessor examples shown above; std::exp needs <cmath>.
+
     // DO NOT EDIT THIS RETURN STATEMENT //
     // It formats your C++ Vector O back into a Tensor of Shape (B, H, N, d) and returns it //
     return torch::from_blob(O.data(), {B, H, N, d}, torch::TensorOptions().dtype(torch::kFloat32)).clone();
@@ -156,6 +168,15 @@ torch::Tensor myUnfusedAttentionBlocked(torch::Tensor QTensor, torch::Tensor KTe
     std::vector<float> QK_t = formatTensor(QK_tTensor);
 
     // -------- YOUR CODE HERE  -------- //
+    // CSUSB HINT (same math as Part 1, but TILED for cache locality — the
+    // RESULT is identical, only the loop order changes):
+    //   1. Choose a block size (e.g. 16 or 32). Compute S = Q*K^T by looping
+    //      over blocks of rows/cols/inner-dim: for each (iBlock, jBlock) accumulate
+    //      over tBlocks, touching only fourDimRead within the current tile.
+    //      Guard the inner loops with std::min(start+blockSize, N) for the tail.
+    //   2. Softmax each row of QK_t exactly as in Part 1.
+    //   3. O = S*V, again blocked. std::min needs <algorithm>.
+    // Start from a correct Part 1 and refactor the loops into blocks.
 
     // DO NOT EDIT THIS RETURN STATEMENT //
     // It formats your C++ Vector O back into a Tensor of Shape (B, H, N, d) and returns it //
@@ -198,9 +219,19 @@ torch::Tensor myFusedAttention(torch::Tensor QTensor, torch::Tensor KTensor, tor
             for (int i = 0; i < N ; i++){
 
 		// YRow is moved inside so each OpenMP thread gets a local copy.
-                at::Tensor ORowTensor = temp.index({torch::indexing::Slice(omp_get_thread_num(), torch::indexing::None)});      
+                at::Tensor ORowTensor = temp.index({torch::indexing::Slice(omp_get_thread_num(), torch::indexing::None)});
                 std::vector<float> ORow = formatTensor(ORowTensor);
 		//YOUR CODE HERE
+		// CSUSB HINT (fused: never materialize the full N x N matrix):
+		//  For this single query row i (batch b, head h):
+		//   1. Compute one row of scores into ORow[j] = sum_t Q[i][t]*K[j][t]
+		//      for j in 0..N (ORow is this thread's private scratch row).
+		//   2. Softmax ORow in place: exp each entry, divide by the row sum.
+		//   3. Accumulate the output row: for t in 0..d,
+		//        O[b,h,i,t] = sum_j ORow[j]*fourDimRead(V,b,h,j,t,...).
+		//  Parallelize the i-loop with: #pragma omp parallel for
+		//  (OMP_NUM_THREADS is capped to temp's row count in gpt149.py, so
+		//   omp_get_thread_num() stays within temp — do not raise it).
             }
 	}
     }
