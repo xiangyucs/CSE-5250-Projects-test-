@@ -30,6 +30,8 @@ make gen && ./gen_data          # default ~160MB (200k points)
 ./gen_data 1000000              # optional: original ~800MB workload
 ```
 Data generation is deterministic — every student gets identical bytes.
+Run `./kmeans` from a writable directory: it creates `data.dat` in the current
+working directory, so a read-only checkout will fail.
 
 ## What to implement
 prog6: profile the three functions in `kmeansThread.cpp`, then parallelize the

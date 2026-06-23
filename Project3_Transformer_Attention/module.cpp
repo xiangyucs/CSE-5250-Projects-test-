@@ -5,6 +5,9 @@
 #include <sys/time.h>
 #include <vector>
 #include <immintrin.h>
+#include <cmath>
+#include <algorithm>
+#include <omp.h>
 
 // Uncomment for ISPC
 //#include "module_ispc.h"
@@ -25,13 +28,13 @@ inline void twoDimWrite(std::vector<float> &tensor, int &x, int &y, const int &s
 }
 
 // Step #2: Implement Read/Write Accessors for a 4D Tensor
-inline float fourDimRead(std::vector<float> &tensor, int &x, int &y, int &z, int &b, 
+inline float fourDimRead(std::vector<float> &tensor, int x, int y, int z, int b,
         const int &sizeX, const int &sizeY, const int &sizeZ) {
     return 0.0;
 }
 
-inline void fourDimWrite(std::vector<float> &tensor, int &x, int &y, int &z, int &b, 
-        const int &sizeX, const int &sizeY, const int &sizeZ, float &val) {
+inline void fourDimWrite(std::vector<float> &tensor, int x, int y, int z, int b,
+        const int &sizeX, const int &sizeY, const int &sizeZ, float val) {
     return; 
 }
 

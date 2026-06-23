@@ -1,3 +1,5 @@
+import os
+os.environ.setdefault("OMP_NUM_THREADS", "8")  # CSUSB: cap OpenMP team to part3 temp's 8 rows (prevents OOB on many-core machines)
 import argparse
 import time
 import math
@@ -319,7 +321,7 @@ def main():
     parser.add_argument("--inference", action="store_true", default=False, help="run gpt inference")
     parser.add_argument("-bc",  default="256", help="Flash Attention Bc Size")
     parser.add_argument("-br", default="256", help="Flash Attention Br Size")
-    parser.add_argument("-N", default="1024", help="Flash Attention Br Size")
+    parser.add_argument("-N", default="1024", help="Sequence length N")
 
     args = parser.parse_args()
 

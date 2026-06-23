@@ -2,6 +2,10 @@
 This readme is a description of the tests included in the test harness (`run_test_harness.py`). There are additional tests defined in `tests.h` and listed in the `main` function of `main.cpp`. Those tests can be run directly through the
 `../part_*/runtasks` binary.
 
+To run a single test, use `./runtasks -n <num_cores> <test>`; to run a subset
+through the harness, pass `-t <test...>`. Running the full harness takes a while,
+so prefer a subset while developing.
+
 ## SuperSuperLight ##
 This test allocates two buffers of size 2^15 elements each and then simply copies elements from one buffer to the other buffer, reversing the order of the copy in each iteration. There are 64 tasks and 400 bulk task launches.
 

@@ -98,7 +98,7 @@ You will not need to make use of any other std::thread API calls in this assignm
   assignment that will achieve this goal, and no communication/synchronization
   among threads is necessary.). In your writeup, describe your approach to parallelization
   and report the final 8-thread speedup obtained. 
-5. Now run your improved code with 16 threads. Is performance noticably greater than when running with eight threads? Why or why not? 
+5. Now run your improved code with a thread count equal to your machine's physical core count, then with double that. Does performance keep improving past your core count? Why or why not? (Relate your answer to your own CPU's physical core count and hyper-threading — not a fixed number.)
   
 ## Program 2: Vectorizing Code Using SIMD Intrinsics (20 points) ##
 
@@ -155,9 +155,10 @@ ISPC compiler and runtime system take on the responsibility of
 generating a program that utilizes the CPU's collection of parallel
 execution resources as efficiently as possible.
 
-You will make a simple fix to Program 3 which is written in a combination of
-C++ and ISPC (the error causes a performance problem, not a correctness one).
-With the correct fix, you should observe a large speedup relative to the
+Program 3 is written in a combination of C++ and ISPC. In Part 1 you will
+compile and run it and reason about its SIMD speedup; in Part 2 you will tune
+the number of ISPC tasks to use multiple cores.
+You should observe a large speedup relative to the
 original sequential (1-thread) Mandelbrot implementation from
 `mandelbrotSerial()` on your own machine. (As guidance, on an 8-core machine
 this can exceed 32x; judge your result relative to the serial baseline and
