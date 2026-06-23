@@ -89,7 +89,7 @@ int main() {
   int *clusterAssignments;
 
   // ---------------------------------------------------------------------------
-  // CSUSB (CSE5250) change: zero-cloud, NO Stanford network required.
+  // CSUSB (CSE5250) change: zero-cloud, no external/campus network required.
   // The original assignment shipped a large data.dat on an internal university
   // network. Here we auto-generate an equivalent dataset on the first
   // run if data.dat is missing, then cache it to disk so every later run (and

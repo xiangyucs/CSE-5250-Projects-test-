@@ -22,7 +22,7 @@ cd prog6_kmeans            && make && ./kmeans           # see note below
 ```
 
 ## prog6 (k-means) — the data just works now
-You do **not** need Stanford's network. On first run, `./kmeans` notices
+You do **not** need any external or campus network. On first run, `./kmeans` notices
 `data.dat` is missing and generates it locally (~160MB, a few seconds), then
 caches it. To pre-build it instead:
 ```bash

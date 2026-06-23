@@ -39,7 +39,7 @@ Part 4 FlashAttention. See the README for the math and per-part skeletons.
 ISPC extra credit is optional.
 
 ## CSUSB changes you should know about
-- The original required Stanford's prebuilt reference module (`module_ref.so`,
+- The original required a prebuilt staff reference module (`module_ref.so`,
   x86_64-Linux only) and an SSH cluster. We made the reference **optional**:
   your code's **correctness is checked against PyTorch** either way. On
   non-x86-Linux machines the "reference" timing column simply mirrors your run.
