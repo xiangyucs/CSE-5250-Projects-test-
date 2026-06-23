@@ -25,7 +25,7 @@ python3 gpt149.py part0        # warm-up: PyTorch matmul + softmax
 python3 gpt149.py part1        # your naive attention
 python3 gpt149.py part2        # blocked matmul
 python3 gpt149.py part3        # fused attention + OpenMP
-python3 gpt149.py part4        # FlashAttention (optional / EC)
+python3 gpt149.py part4        # FlashAttention (required)
 python3 gpt149.py 4Daccess     # warm-up tensor accessor test
 ```
 `gpt149.py` compiles your `module.cpp` automatically and picks the correct
@@ -35,8 +35,8 @@ compile flags for your platform.
 Warm-up accessors → Part 1 naive → Part 2 blocked → Part 3 fused + OpenMP →
 Part 4 FlashAttention. See the README for the math and per-part skeletons.
 
-**Suggested required set for this course:** Parts 1–3. Part 4 (FlashAttention)
-and the ISPC extra credit are optional.
+**Required for this course:** Parts 1–4 (including FlashAttention). Only the
+ISPC extra credit is optional.
 
 ## CSUSB changes you should know about
 - The original required Stanford's prebuilt reference module (`module_ref.so`,

@@ -191,9 +191,9 @@ In this part of the assignment, we want you to improve the efficiency of your ta
 
 * You might want to consider writing additional test cases to exercise your system.  __The assignment starter code includes the workloads used to grade the performance of your code, but your implementation's correctness may also be tested using a wider set of workloads that are not provided in the starter code!__
 
-## Part B (OPTIONAL / Extra Credit): Supporting Execution of Task Graphs
+## Part B: Supporting Execution of Task Graphs
 
-**Part A is required. Part B (async + dependency graph) is OPTIONAL / extra credit in this course.**
+**Both Part A and Part B are required in this course.**
 
 In part B of the assignment you will extend your part A task system implementation to support the asynchronous launch of tasks that may have dependencies on previous tasks.  These inter-task dependencies create scheduling constraints that your task execution library must respect.
 
@@ -300,7 +300,7 @@ Points in this assignment will be assigned as follows,
 - 5 points for correctness of `TaskSystemParallelSpawn::run()` + 5 points for its performance.  (10 points total)
 - 10 points each for correctness `TaskSystemParallelThreadPoolSpinning::run()` and `TaskSystemParallelThreadPoolSleeping::run()` + 10 points each for the performance of these methods. (40 points total)
 
-**Part B (40 points) — OPTIONAL / extra credit**
+**Part B (40 points) — required**
 - 30 points for correctness of `TaskSystemParallelThreadPoolSleeping::runAsyncWithDeps()`, `TaskSystemParallelThreadPoolSleeping::run()`, and `TaskSystemParallelThreadPoolSleeping::sync()`
 - 10 points for performance of `TaskSystemParallelThreadPoolSleeping::runAsyncWithDeps()`, `TaskSystemParallelThreadPoolSleeping::run()`, and `TaskSystemParallelThreadPoolSleeping::sync()`. For part B, you can ignore results for `Parallel + Always Spawn` and `Parallel + Thread Pool + Spin`. That is, you only need to pass `Parallel + Thread Pool + Sleep` for each test case. 
 
@@ -315,15 +315,15 @@ Submit on Canvas.  Your submission should include both your task system code, an
 
  * part_a/tasksys.cpp  (required)
  * part_a/tasksys.h  (required)
- * part_b/tasksys.cpp  (optional / extra credit)
- * part_b/tasksys.h  (optional / extra credit)
+ * part_b/tasksys.cpp  (required)
+ * part_b/tasksys.h  (required)
  * Your write-up PDF
 
-Part A files are required. The part_b files are only needed if you attempt the optional extra-credit Part B.
+Both Part A and Part B files are required.
 
 #### Code Handin ####
 
-Submit your source files `part_a/tasksys.cpp|.h` (and, if you attempt the optional Part B, `part_b/tasksys.cpp|.h`) in a compressed file. You can create a directory (e.g named `asst2_submission`) with sub-directories `part_a` and `part_b`, drop the relevant files in, compress the directory by running `tar -czvf asst2.tar.gz asst2_submission`, and upload it. Submit the **compressed file** `asst2.tar.gz` on Canvas.
+Submit your source files `part_a/tasksys.cpp|.h` and `part_b/tasksys.cpp|.h` in a compressed file. You can create a directory (e.g named `asst2_submission`) with sub-directories `part_a` and `part_b`, drop the relevant files in, compress the directory by running `tar -czvf asst2.tar.gz asst2_submission`, and upload it. Submit the **compressed file** `asst2.tar.gz` on Canvas.
 
 Before submitting the source files, make sure that all code is compilable and runnable! It should be possible to drop these files into a clean starter code tree, type `make`, and then execute your program without manual intervention.
 

@@ -53,16 +53,17 @@ residual branding.
   build order (Spawn → ThreadPool-Spinning → ThreadPool-Sleeping) and what each
   one does. `part_b/tasksys.cpp` has a design sketch for the dependency graph.
 
-### 3. Reduced workload (suggested required set — your call as instructor)
-- **Project 1:** prog6's default dataset is now ~160MB / 200k points (was ~800MB /
-  1M points), so runs finish in seconds. Set `DATA_M = 1000000` in `main.cpp`
-  (or `./gen_data 1000000`) to restore the original size.
-- **Project 2:** treat **Part A as required, Part B as extra credit.** Part B
-  (async + dependency graph) is the hardest, most time-consuming piece and is
-  not needed to teach the core thread-pool concepts.
-- **Project 3:** Parts 1–3 cover the key ideas (naive → blocked → fused+OpenMP).
-  Consider making **Part 4 (FlashAttention)** and the **ISPC extra credit**
-  optional.
+### 3. Workload (all parts required)
+All substantive parts of all three projects are **required**; only items
+explicitly labeled "Extra Credit" (e.g. the Project 3 ISPC vectorization) are
+optional bonus.
+- **Project 1:** all six programs (prog1–prog6) are required. prog6's default
+  dataset is ~160MB / 200k points (was ~800MB / 1M points) so runs finish in
+  seconds; set `DATA_M = 1000000` in `main.cpp` (or `./gen_data 1000000`) to
+  restore the original size.
+- **Project 2:** both **Part A and Part B** are required.
+- **Project 3:** **Parts 1–4** (naive → blocked → fused+OpenMP → FlashAttention)
+  are required; the ISPC extra credit is optional.
 
 ### 4. Relaxed, laptop-fair grading
 - Grade **correctness first.** For performance, judge **speedup relative to the

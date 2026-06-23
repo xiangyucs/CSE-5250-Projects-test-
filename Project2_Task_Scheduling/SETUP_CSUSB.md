@@ -23,9 +23,8 @@ Replace `8` with your core count. See `tests/README.md` for test names.
 `TaskSystemParallelThreadPoolSleeping`. The Serial class is provided as a
 correctness reference. See the HINT block at the top of the file.
 
-**Part B (extra credit in this course):** async launches + dependency graph in
-`part_b/tasksys.cpp`. See the design sketch in that file. Skip if your
-instructor assigned Part A only.
+**Part B (required):** async launches + dependency graph in
+`part_b/tasksys.cpp`. See the design sketch in that file.
 
 ## Notes on grading (laptop-fair)
 - The harness compares your implementation to a prebuilt reference binary **on

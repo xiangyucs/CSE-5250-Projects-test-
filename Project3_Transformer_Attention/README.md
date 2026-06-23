@@ -1,6 +1,6 @@
 # Project 3: NanoGPT Attention
 
-**Parts 1–3 are the required core (naive → blocked → fused+OpenMP). Part 4 (FlashAttention) and the ISPC vectorization extra credit are OPTIONAL.**
+**Parts 1–4 are all required (naive → blocked → fused+OpenMP → FlashAttention). Only the ISPC vectorization extra credit is OPTIONAL.**
 
 **Grading:** Correctness is checked against PyTorch (pass/fail). For performance, report the speedup of each part over your Part 1 baseline, and your core count.
 
@@ -331,7 +331,7 @@ Note that you will not be autograded on inference, and this is purely for fun. P
   * Why do we use a drastically smaller amount of memory in Part 3 when compared to Parts 1 & 2?
   * Comment out your `#pragma omp ...` statement, what happens to your cpu time? Record the cpu time in your writeup. Why does fused attention make it easier for us utilize multithreading to a much fuller extent when compared to Part 1?
 
-## Part 4 (OPTIONAL): Putting it all Together - Flash Attention
+## Part 4: Putting it all Together - Flash Attention
 ### Why Are Matrix Multiply and Softmax Hard to Fuse as Blocks?
 The attention formula is very awkward to fuse for a couple reasons. Notice how the formula consists of a matrix multiply, followed by a row-wise calculation from softmax, and concluded with another matrix multiplication. The true thing that makes it difficult from fusing these three operations as blocks is the fact that softmax has to operate on the entire row. So, if we want to bypass this dependency we really have to think outside the box. That is where Flash Attention comes in.
 
@@ -427,12 +427,12 @@ To enable them in your `module.cpp` file, all you need to simply uncomment the f
 * Implement `myNaiveAttention` (Part 1, required)
 * Implement `myUnfusedAttentionBlocked` (Part 2, required)
 * Implement `myFusedAttention` (Part 3, required)
-* Implement `myFlashAttention` (Part 4, OPTIONAL)
+* Implement `myFlashAttention` (Part 4, required)
 * Answer Writeup Questions
   * 1 Warm-Up Question
   * 2 Part 2 Questions
   * 2 Part 3 Questions
-  * 2 Part 4 Questions (optional)
+  * 2 Part 4 Questions (required)
 * Extra Credit: Vectorize Parts 1-4 with ISPC (OPTIONAL)
 
 ## Hand-in Instructions

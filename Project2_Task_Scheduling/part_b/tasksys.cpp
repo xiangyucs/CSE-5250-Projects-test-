@@ -1,7 +1,7 @@
 #include "tasksys.h"
 
 /* ===========================================================================
- * CSUSB (CSE5250) HINT -- Part B (OPTIONAL / EXTRA CREDIT in this course)
+ * CSUSB (CSE5250) HINT -- Part B (REQUIRED in this course)
  * ---------------------------------------------------------------------------
  * Part B extends ONLY the Sleeping thread pool to support asynchronous launches
  * with dependencies: runAsyncWithDeps(runnable, n, deps) returns a TaskID and
